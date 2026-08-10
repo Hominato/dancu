@@ -3,7 +3,7 @@
  * LocalStorage Central Database Layer
  */
 
-const DATA_VERSION = 'v2.0-karlee';  // Bump this to force a reset on next load
+const DATA_VERSION = 'v3.0-require-login';  // Require login on initial visit
 
 const STORAGE_KEYS = {
     USER: 'americu_user',
@@ -364,9 +364,9 @@ const INITIAL_DATA = {
     },
 
     auth: {
-        isLoggedIn: true,
-        mfaVerified: true,
-        user: { email: 'oeoeieoeow@gmail.com', name: 'Karlee Grey' }
+        isLoggedIn: false,
+        mfaVerified: false,
+        user: null
     },
 
     transactions: [

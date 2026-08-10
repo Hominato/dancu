@@ -15,12 +15,12 @@ const App = {
 
     // Authentication Guard
     checkAuth() {
-        const publicPages = ['login.html', 'register.html', 'index.html'];
+        const publicPages = ['login.html', 'register.html'];
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const session = Storage.getAuthSession();
 
         if (!session.isLoggedIn || !session.mfaVerified) {
-            if (!publicPages.includes(currentPage) && currentPage !== '') {
+            if (!publicPages.includes(currentPage)) {
                 window.location.href = 'login.html';
             }
         } else {
