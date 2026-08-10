@@ -1,0 +1,395 @@
+/* ==========================================================================
+   AmeriCU Credit Union — Responsive Design & Mobile Layout
+   ========================================================================== */
+
+/* ─── Mobile Bottom Navigation Bar (hidden on desktop) ─────────────────────── */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    z-index: 1000;
+    padding: 0 0.5rem;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    color: var(--color-text-muted);
+    font-size: 0.675rem;
+    font-weight: 500;
+    flex: 1;
+    height: 100%;
+    transition: color var(--transition-speed);
+}
+
+.mobile-nav-item svg {
+    width: 22px;
+    height: 22px;
+}
+
+.mobile-nav-item.active {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .mobile-nav-item.active {
+    color: #60A5FA;
+}
+
+/* ─── Mobile Drawer Overlay ─────────────────────────────────────────────────── */
+.mobile-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.mobile-drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ─── Tablet & Narrow Desktop (< 1024px) ────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1100;
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+
+    .menu-toggle-btn {
+        display: block;
+    }
+
+    .dashboard-dual-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Auth: hide brand column, fill form to full width */
+    .auth-brand-side {
+        display: none;
+    }
+
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-form-side {
+        padding: 1.5rem;
+    }
+}
+
+/* ─── Mobile (< 768px) ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Layout */
+    .top-header {
+        padding: 0 1rem;
+        height: 60px;
+    }
+
+    .content-body {
+        padding: 1rem;
+        padding-bottom: 80px;
+    }
+
+    .mobile-bottom-nav {
+        display: flex;
+    }
+
+    /* Sidebar full-width on small screens */
+    .sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Page titles */
+    .page-title {
+        font-size: 1.05rem;
+    }
+
+    /* Balance hero */
+    .balance-hero-amount {
+        font-size: 2rem;
+    }
+
+    .balance-hero-card {
+        padding: 1.25rem;
+    }
+
+    /* Quick actions */
+    .quick-actions-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-action-item {
+        padding: 0.75rem 0.25rem;
+        font-size: 0.7rem;
+    }
+
+    .quick-action-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .quick-action-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Tables — hide less-important columns */
+    .data-table th,
+    .data-table td {
+        padding: 0.65rem 0.5rem;
+        font-size: 0.775rem;
+    }
+
+    /* Cards grid — stack to single column */
+    .summary-grid,
+    .stats-grid,
+    .accounts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Dashboard dual-grid already handled above */
+    .dashboard-dual-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* Card widgets in grid layout */
+    .widget-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Transaction list — compact */
+    .trx-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    /* Forms — single column */
+    .form-grid-2,
+    .form-grid-3 {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Modals — full width */
+    .modal-box {
+        width: 95vw;
+        margin: 1rem auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Auth card */
+    .auth-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    /* MFA grid */
+    .mfa-code-grid {
+        gap: 0.4rem;
+    }
+
+    .mfa-code-grid input {
+        width: 44px;
+        height: 52px;
+        font-size: 1.25rem;
+    }
+
+    /* Statement paper */
+    .statement-paper {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Bills / beneficiaries items */
+    .bill-item,
+    .beneficiary-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .bill-item-actions,
+    .beneficiary-item-actions {
+        align-self: flex-end;
+    }
+
+    /* Transfers form */
+    .transfer-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cards page 3D card — scale down */
+    .card-3d-scene {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    /* Header right — hide user name text on small screens */
+    .user-name {
+        display: none;
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    /* Notification / message list */
+    .message-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .message-sidebar-panel {
+        display: none;
+    }
+
+    .message-sidebar-panel.mobile-visible {
+        display: flex;
+    }
+
+    /* Admin panel grid */
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Profile form */
+    .profile-form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Security section stacked */
+    .security-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Small Phones (< 430px) ─────────────────────────────────────────────────── */
+@media (max-width: 430px) {
+    .quick-actions-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .balance-hero-card {
+        padding: 1rem;
+    }
+
+    .mfa-code-grid input {
+        width: 42px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .content-body {
+        padding: 0.75rem;
+        padding-bottom: 80px;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .card-header {
+        padding: 1rem 1rem 0.75rem;
+    }
+
+    .page-title {
+        font-size: 0.95rem;
+    }
+
+    /* Reduce table columns further */
+    .data-table .col-hide-xs {
+        display: none;
+    }
+
+    /* Auth */
+    .auth-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .auth-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* ─── Extra Small (< 375px) ─────────────────────────────────────────────────── */
+@media (max-width: 375px) {
+    .user-info {
+        display: none;
+    }
+
+    .mfa-code-grid {
+        gap: 0.3rem;
+    }
+
+    .mfa-code-grid input {
+        width: 38px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+
+    .quick-actions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+    }
+
+    .balance-hero-amount {
+        font-size: 1.75rem;
+    }
+}
+
+/* ─── Landscape phone adjustment ────────────────────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-bottom-nav {
+        height: 52px;
+    }
+
+    .content-body {
+        padding-bottom: 60px;
+    }
+
+    .sidebar {
+        overflow-y: auto;
+    }
+}
+
+/* ─── Print — hide navigation chrome ────────────────────────────────────────── */
+@media print {
+    .sidebar,
+    .top-header,
+    .mobile-bottom-nav,
+    .no-print {
+        display: none !important;
+    }
+
+    .main-wrapper {
+        margin-left: 0 !important;
+    }
+}

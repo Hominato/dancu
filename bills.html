@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Pay — AmeriCU Credit Union</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-logo"><img src="assets/images/logo.png" alt="AmeriCU Credit Union"></a>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-category">Main Menu</div>
+                <a href="dashboard.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Dashboard</span></a>
+                <a href="accounts.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+                <a href="transfers.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfers</span></a>
+                <a href="beneficiaries.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Beneficiaries</span></a>
+                <a href="cards.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+                <a href="bills.html" class="nav-item active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Bill Pay</span></a>
+                <a href="transactions.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><span>Transactions</span></a>
+                <a href="statements.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg><span>Statements</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button onclick="App.handleLogout()" class="btn btn-outline btn-full btn-sm">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+                    <h1 class="page-title">Bill Pay Center</h1>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <h2 style="font-size:1.5rem; font-weight:800;">Upcoming & Scheduled Bills</h2>
+                        <p style="font-size:0.875rem; color:var(--color-text-muted);">Schedule automated utility payments and manage registered billers.</p>
+                    </div>
+                    <button id="add-biller-btn" class="btn btn-primary">+ Add New Biller</button>
+                </div>
+
+                <div id="bills-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Recent Bill Payments Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Bill Payment History</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Payment Date</th>
+                                    <th>Biller</th>
+                                    <th>Category</th>
+                                    <th>Paid From</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bill-history-tbody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Pay Bill Modal -->
+    <div id="pay-bill-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Pay Bill</h3>
+                <button class="modal-close" onclick="App.closeModal('pay-bill-modal')">&times;</button>
+            </div>
+            <form id="pay-bill-form">
+                <div class="modal-body">
+                    <input type="hidden" id="pay-bill-id">
+                    <div class="form-group">
+                        <label class="form-label">Biller Name</label>
+                        <input type="text" id="pay-biller-name" class="form-control" readonly style="background:var(--color-bg);">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">From Account</label>
+                        <select id="pay-from-account" class="form-control" required>
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount ($)</label>
+                        <input type="number" step="0.01" min="0.01" id="pay-amount" class="form-control" required style="font-size:1.2rem; font-weight:700;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Payment Date</label>
+                        <input type="date" id="pay-date" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="App.closeModal('pay-bill-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-accent">Submit Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Biller Modal -->
+    <div id="add-biller-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Register New Biller</h3>
+                <button class="modal-close" onclick="App.closeModal('add-biller-modal')">&times;</button>
+            </div>
+            <form id="add-biller-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Biller Company Name</label>
+                        <input type="text" id="new-biller-name" class="form-control" placeholder="e.g. City Power & Light" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select id="new-biller-cat" class="form-control">
+                            <option value="Utilities">Utilities</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Biller Account Number</label>
+                        <input type="text" id="new-biller-acc" class="form-control" placeholder="ACC-88192" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Estimated Bill Amount ($)</label>
+                        <input type="number" step="0.01" id="new-biller-amount" class="form-control" placeholder="100.00" required>
+                    </div>
+                    <div class="form-group" style="display:flex; align-items:center; gap:0.5rem;">
+                        <input type="checkbox" id="new-biller-autopay">
+                        <label for="new-biller-autopay" class="form-label" style="margin:0;">Enable AutoPay on Due Date</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="App.closeModal('add-biller-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Biller</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Home</span></a>
+        <a href="accounts.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+        <a href="transfers.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfer</span></a>
+        <a href="cards.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+    </nav>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bills.js"></script>
+</body>
+</html>

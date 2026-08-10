@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In — AmeriCU Credit Union</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-container">
+        <!-- Left Hero Branding Side -->
+        <div class="auth-brand-side">
+            <div class="auth-brand-header">
+                <img src="assets/images/logo.png" alt="AmeriCU Credit Union" style="max-height:48px;">
+            </div>
+
+            <div class="auth-brand-hero">
+                <h1>Secure Digital Banking Built for You</h1>
+                <p>Experience member-first credit union banking with instant transfers, intelligent budgeting, and
+                    modern security controls.</p>
+
+                <div class="auth-feature-list">
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <span>256-Bit Encrypted Simulation Protection</span>
+                    </div>
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span>Instant 24/7 Member-to-Member Transfers</span>
+                    </div>
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>Virtual Cards & Instant Freeze Controls</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-brand-footer">
+                &copy; 2026 AmeriCU Credit Union. Fictional Demonstration System.
+            </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="auth-form-side">
+
+            <!-- STEP 1: LOGIN FORM -->
+            <div id="login-step-1" class="auth-card">
+                <div class="auth-header">
+                    <!-- Logo shown on mobile (brand side is hidden on small screens) -->
+                    <div class="auth-mobile-logo">
+                        <img src="assets/images/logo.png" alt="AmeriCU Credit Union">
+                    </div>
+                    <h2 class="auth-title">Member Sign In</h2>
+                    <p class="auth-subtitle">Access your AmeriCU credit union account</p>
+                </div>
+
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username or Email</label>
+                        <input type="email" id="username" class="form-control" placeholder="Enter your email address"
+                            required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label for="password" class="form-label">Password</label>
+                            <a href="#" id="forgot-password-link" style="font-size:0.775rem;">Forgot Password?</a>
+                        </div>
+                        <div class="password-input-wrap">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                                required autocomplete="current-password">
+                            <button type="button" id="toggle-password-btn" class="password-toggle-btn"
+                                aria-label="Toggle password visibility">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem;">
+                        <input type="checkbox" id="remember" checked style="width:16px; height:16px;">
+                        <label for="remember" style="font-size:0.85rem; color:var(--color-text-muted);">Remember this
+                            browser</label>
+                    </div>
+
+                    <button type="submit" id="login-submit-btn" class="btn btn-primary btn-full"
+                        style="padding:0.85rem;">
+                        <span>Sign In</span>
+                    </button>
+                </form>
+
+                <div style="text-align:center; margin-top:1.75rem; font-size:0.875rem; color:var(--color-text-muted);">
+                    Not a member yet? <a href="register.html" style="font-weight:600;">Become a Member</a>
+                </div>
+            </div>
+
+            <!-- STEP 2: MFA VERIFICATION SCREEN -->
+            <div id="login-step-2" class="auth-card" style="display:none;">
+                <div class="auth-header">
+                    <div
+                        style="width:48px; height:48px; background:rgba(32,180,134,0.12); color:var(--color-accent); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="26" height="26">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h2 class="auth-title">Two-Factor Authentication</h2>
+                    <p class="auth-subtitle">Enter the 6-digit verification code.
+                    </p>
+                </div>
+
+
+
+                <form id="mfa-form">
+                    <div class="mfa-code-grid">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autofocus class="mfa-input"
+                            data-index="0">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="mfa-input"
+                            data-index="1">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="mfa-input"
+                            data-index="2">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="mfa-input"
+                            data-index="3">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="mfa-input"
+                            data-index="4">
+                        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="mfa-input"
+                            data-index="5">
+                    </div>
+
+                    <button type="submit" id="mfa-submit-btn" class="btn btn-primary btn-full" style="padding:0.85rem;">
+                        <span>Verify & Continue</span>
+                    </button>
+                </form>
+
+                <div class="mfa-resend-wrap">
+                    Didn't receive code? <a href="#" id="resend-mfa-btn">Resend Code</a> <span id="mfa-timer"></span>
+                </div>
+
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <button type="button" id="mfa-back-btn" class="btn btn-outline btn-sm">← Back to Sign In</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

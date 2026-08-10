@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Member — AmeriCU Credit Union</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+        <!-- Left Hero Branding Side -->
+        <div class="auth-brand-side">
+            <div class="auth-brand-header">
+                <img src="assets/images/logo.png" alt="AmeriCU Credit Union" style="max-height:48px;">
+            </div>
+
+            <div class="auth-brand-hero">
+                <h1>Join Over 150,000 Credit Union Members</h1>
+                <p>Enjoy higher savings yields, lower loan rates, and zero hidden maintenance fees.</p>
+
+                <div class="auth-feature-list">
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>No monthly service fees on Primary Checking</span>
+                    </div>
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>High-Yield Savings at 3.85% APY</span>
+                    </div>
+                    <div class="auth-feature-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>Access 30,000+ Fee-Free ATMs Nationwide</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-brand-footer">
+                &copy; 2026 AmeriCU Credit Union. Fictional Demonstration System.
+            </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="auth-form-side">
+            <div class="auth-card" style="max-width:500px;">
+                <div class="auth-header">
+                    <h2 class="auth-title">Open an Account</h2>
+                    <p class="auth-subtitle">Apply for your AmeriCU membership in minutes</p>
+                </div>
+
+                <form id="register-form">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" placeholder="Alex" required value="Alex">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Morgan" required value="Morgan">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="alex@example.com" required value="demo@americu.example">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" placeholder="(555) 234-5678" required value="(555) 234-5678">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Account Preference</label>
+                        <select class="form-control">
+                            <option value="checking_savings">Primary Checking & High-Yield Savings</option>
+                            <option value="checking">Primary Checking Only</option>
+                            <option value="savings">High-Yield Savings Only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Create Password</label>
+                        <input type="password" class="form-control" placeholder="••••••••••••" required value="DemoBank123!">
+                    </div>
+
+                    <div class="form-group" style="display:flex; align-items:flex-start; gap:0.5rem; margin-bottom:1.5rem;">
+                        <input type="checkbox" id="terms" checked style="margin-top:3px;">
+                        <label for="terms" style="font-size:0.8rem; color:var(--color-text-muted);">
+                            I agree to the fictional AmeriCU Member Agreement and E-Sign Consent.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" style="padding:0.85rem;">
+                        <span>Submit Demo Application</span>
+                    </button>
+                </form>
+
+                <div style="text-align:center; margin-top:1.5rem; font-size:0.875rem; color:var(--color-text-muted);">
+                    Already have an account? <a href="login.html" style="font-weight:600;">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

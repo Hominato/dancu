@@ -1,0 +1,235 @@
+/* ==========================================================================
+   AmeriCU Credit Union — Dashboard Specific Layout & Widgets
+   ========================================================================== */
+
+/* Welcome Banner & Summary Grid */
+.dashboard-welcome {
+    margin-bottom: 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.welcome-text h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.last-login-tag {
+    font-size: 0.825rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+/* Total Balance Card Hero */
+.balance-hero-card {
+    background: linear-gradient(135deg, #123B72 0%, #1D65A6 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.balance-hero-card::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    bottom: -40px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(32, 180, 134, 0.3) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+}
+
+.balance-hero-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.balance-label {
+    font-size: 0.875rem;
+    color: #93C5FD;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.balance-hero-amount {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.balance-hero-sub {
+    font-size: 0.9rem;
+    color: #E2E8F0;
+    margin-top: 0.5rem;
+}
+
+/* Accounts Summary Grid */
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.account-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.account-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-secondary);
+}
+
+.account-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.account-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.account-mask {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.account-balance-label {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+}
+
+.account-balance-val {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 0.15rem;
+}
+
+/* Quick Actions Grid */
+.quick-actions-card {
+    margin-bottom: 2rem;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1rem;
+}
+
+.quick-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 1.1rem 0.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.quick-action-item:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.quick-action-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(32, 180, 134, 0.12);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-action-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Balance History Chart */
+.chart-card {
+    margin-bottom: 2rem;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 0.35rem;
+    background: var(--color-bg);
+    padding: 3px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.chart-period-btn {
+    background: none;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.chart-period-btn.active {
+    background: var(--color-surface);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 260px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.chart-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Grid Layout Dual Column Dashboard */
+.dashboard-dual-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}

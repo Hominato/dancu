@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Transfer — AmeriCU Credit Union</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .transfer-steps-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .transfer-steps-indicator::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-border);
+            z-index: 1;
+        }
+        .step-item {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            flex: 1;
+        }
+        .step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            transition: all var(--transition-speed);
+        }
+        .step-item.active .step-num {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(18,59,114,0.15);
+        }
+        .step-item.completed .step-num {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+        .step-item.active .step-label {
+            color: var(--color-primary);
+        }
+        .type-option-card {
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .type-option-card:hover, .type-option-card.selected {
+            border-color: var(--color-secondary);
+            background: rgba(29, 101, 166, 0.04);
+        }
+    </style>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-logo"><img src="assets/images/logo.png" alt="AmeriCU Credit Union"></a>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-category">Main Menu</div>
+                <a href="dashboard.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Dashboard</span></a>
+                <a href="accounts.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+                <a href="transfers.html" class="nav-item active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfers</span></a>
+                <a href="beneficiaries.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Beneficiaries</span></a>
+                <a href="cards.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+                <a href="bills.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Bill Pay</span></a>
+                <a href="transactions.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><span>Transactions</span></a>
+                <a href="statements.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg><span>Statements</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button onclick="App.handleLogout()" class="btn btn-outline btn-full btn-sm">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+                    <h1 class="page-title">Move Money & Transfers</h1>
+                </div>
+            </header>
+
+            <main class="content-body" style="max-width:800px; margin:0 auto;">
+                
+                <!-- Multi-Step Progress Indicator -->
+                <div class="transfer-steps-indicator">
+                    <div class="step-item active" data-step="1">
+                        <div class="step-num">1</div>
+                        <div class="step-label">Type</div>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <div class="step-num">2</div>
+                        <div class="step-label">Recipient</div>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <div class="step-num">3</div>
+                        <div class="step-label">Details</div>
+                    </div>
+                    <div class="step-item" data-step="4">
+                        <div class="step-num">4</div>
+                        <div class="step-label">Review</div>
+                    </div>
+                    <div class="step-item" data-step="5">
+                        <div class="step-num">5</div>
+                        <div class="step-label">Confirm</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <!-- STEP 1: SELECT TRANSFER TYPE -->
+                    <div id="transfer-step-1" class="transfer-wizard-step">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Step 1: Choose Transfer Type</h2>
+                                <p class="card-subtitle">Select where you want to transfer funds</p>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+                            <div class="type-option-card selected" data-type="internal">
+                                <div style="width:44px; height:44px; border-radius:50%; background:rgba(29,101,166,0.1); color:var(--color-secondary); display:flex; align-items:center; justify-content:center;">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700; font-size:1rem; color:var(--color-text);">Between My Accounts</div>
+                                    <div style="font-size:0.8rem; color:var(--color-text-muted);">Transfer instantly between Checking, Savings, and Emergency accounts.</div>
+                                </div>
+                            </div>
+
+                            <div class="type-option-card" data-type="member">
+                                <div style="width:44px; height:44px; border-radius:50%; background:rgba(32,180,134,0.1); color:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700; font-size:1rem; color:var(--color-text);">To Another AmeriCU Member</div>
+                                    <div style="font-size:0.8rem; color:var(--color-text-muted);">Instant zero-fee transfer to any credit union member.</div>
+                                </div>
+                            </div>
+
+                            <div class="type-option-card" data-type="external">
+                                <div style="width:44px; height:44px; border-radius:50%; background:rgba(2,132,199,0.1); color:var(--color-info); display:flex; align-items:center; justify-content:center;">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700; font-size:1rem; color:var(--color-text);">To External Bank Account</div>
+                                    <div style="font-size:0.8rem; color:var(--color-text-muted);">Transfer to US banks via ACH routing & account numbers.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:flex-end; margin-top:2rem;">
+                            <button id="step1-next-btn" class="btn btn-primary">Continue to Recipient →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: SELECT RECIPIENT -->
+                    <div id="transfer-step-2" class="transfer-wizard-step" style="display:none;">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Step 2: Recipient Details</h2>
+                                <p class="card-subtitle">Select a saved beneficiary or enter recipient details</p>
+                            </div>
+                        </div>
+
+                        <div id="recipient-internal-msg" style="display:none;" class="demo-creds-box">
+                            Internal Transfer Selected: Funds will be moved between your own AmeriCU accounts.
+                        </div>
+
+                        <div id="recipient-form-wrap">
+                            <div class="form-group">
+                                <label class="form-label">Saved Beneficiaries</label>
+                                <select id="transfer-beneficiary-select" class="form-control">
+                                    <option value="new">-- Enter New Recipient --</option>
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+
+                            <div id="new-recipient-fields" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <label class="form-label">Recipient Full Name</label>
+                                    <input type="text" id="recip-name" class="form-control" placeholder="Jordan Williams">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bank Name</label>
+                                    <input type="text" id="recip-bank" class="form-control" placeholder="Demo National Bank">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Routing Number (9 digits)</label>
+                                    <input type="text" maxlength="9" id="recip-routing" class="form-control" placeholder="987654321">
+                                </div>
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <label class="form-label">Account Number</label>
+                                    <input type="text" id="recip-account" class="form-control" placeholder="9876543210">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; margin-top:2rem;">
+                            <button class="btn btn-outline wizard-back-btn">← Back</button>
+                            <button id="step2-next-btn" class="btn btn-primary">Continue to Details →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: TRANSFER DETAILS -->
+                    <div id="transfer-step-3" class="transfer-wizard-step" style="display:none;">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Step 3: Amount & Account</h2>
+                                <p class="card-subtitle">Specify source account, transfer amount, and date</p>
+                            </div>
+                        </div>
+
+                        <form id="transfer-details-form">
+                            <div class="form-group">
+                                <label class="form-label">From Account</label>
+                                <select id="transfer-from-account" class="form-control" required>
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="to-account-wrap">
+                                <label class="form-label">To Account</label>
+                                <select id="transfer-to-account" class="form-control">
+                                    <!-- Populated by JS for internal transfers -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Transfer Amount ($)</label>
+                                <input type="number" step="0.01" min="0.01" id="transfer-amount" class="form-control" placeholder="500.00" required style="font-size:1.25rem; font-weight:700;">
+                                <div class="form-text" id="available-bal-notice">Available Balance: $8,420.65</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Transfer Date</label>
+                                <input type="date" id="transfer-date" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Memo / Description (Optional)</label>
+                                <input type="text" id="transfer-memo" class="form-control" placeholder="Rent contribution, Gift, etc.">
+                            </div>
+                        </form>
+
+                        <div style="display:flex; justify-content:space-between; margin-top:2rem;">
+                            <button class="btn btn-outline wizard-back-btn">← Back</button>
+                            <button id="step3-next-btn" class="btn btn-primary">Review Transfer →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: REVIEW & CONFIRM -->
+                    <div id="transfer-step-4" class="transfer-wizard-step" style="display:none;">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Step 4: Review Transfer</h2>
+                                <p class="card-subtitle">Verify details before submitting</p>
+                            </div>
+                        </div>
+
+                        <div style="background:var(--color-bg); border-radius:var(--radius-md); padding:1.5rem; margin-bottom:1.5rem;">
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--color-border);">
+                                <span style="color:var(--color-text-muted);">From Account:</span>
+                                <strong id="rev-from-account">Primary Checking (•••• 4821)</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--color-border);">
+                                <span style="color:var(--color-text-muted);">To Recipient:</span>
+                                <strong id="rev-to-recipient">Savings (•••• 7314)</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--color-border);">
+                                <span style="color:var(--color-text-muted);">Transfer Amount:</span>
+                                <strong style="font-size:1.2rem; color:var(--color-text);" id="rev-amount">$500.00</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--color-border);">
+                                <span style="color:var(--color-text-muted);">Service Fee:</span>
+                                <strong style="color:var(--color-success);">$0.00 (Zero Fee)</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--color-border);">
+                                <span style="color:var(--color-text-muted);">Scheduled Date:</span>
+                                <strong id="rev-date">Aug 10, 2026</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.5rem 0;">
+                                <span style="color:var(--color-text-muted);">Memo:</span>
+                                <span id="rev-memo">Member Transfer</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; margin-top:2rem;">
+                            <button class="btn btn-outline wizard-back-btn">← Edit Details</button>
+                            <button id="submit-transfer-btn" class="btn btn-accent btn-lg" style="padding:0.75rem 2rem;">
+                                <span>Confirm & Submit Transfer</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: CONFIRMATION RECEIPT -->
+                    <div id="transfer-step-5" class="transfer-wizard-step" style="display:none; text-align:center; padding:1.5rem 0;">
+                        <div style="width:64px; height:64px; border-radius:50%; background:var(--color-success-bg); color:var(--color-success); display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="36" height="36"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+
+                        <h2 style="font-size:1.75rem; font-weight:800; color:var(--color-text);">Transfer Submitted Successfully</h2>
+                        <p style="color:var(--color-text-muted); margin-top:0.35rem;">Your transaction has been processed and recorded.</p>
+
+                        <div style="background:var(--color-bg); border:1px dashed var(--color-accent); border-radius:var(--radius-md); padding:1.25rem; margin:1.5rem auto; max-width:420px; text-align:left;">
+                            <div style="font-size:0.75rem; color:var(--color-text-muted); text-transform:uppercase;">Reference Code</div>
+                            <div style="font-size:1.25rem; font-weight:800; color:var(--color-primary); letter-spacing:1px;" id="conf-ref-code">TRX-20260810-48392</div>
+                            <hr style="margin:0.75rem 0; border:none; border-top:1px solid var(--color-border);">
+                            <div style="font-size:0.875rem; color:var(--color-text);">
+                                Amount: <strong id="conf-amount">$500.00</strong><br>
+                                From: <span id="conf-from">Primary Checking</span><br>
+                                To: <span id="conf-to">Savings</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:center; gap:1rem;">
+                            <button onclick="window.location.reload()" class="btn btn-outline">Make Another Transfer</button>
+                            <a href="dashboard.html" class="btn btn-primary">Return to Dashboard</a>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Home</span></a>
+        <a href="accounts.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+        <a href="transfers.html" class="mobile-nav-item active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfer</span></a>
+        <a href="cards.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+    </nav>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/transfers.js"></script>
+</body>
+</html>

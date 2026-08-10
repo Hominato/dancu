@@ -1,0 +1,4 @@
+.DS_Store
+.gemini
+__pycache__/
+*.pyc

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Management — AmeriCU Credit Union</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* 3D Card CSS Container */
+        .credit-card-wrap {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 420px;
+            height: 250px;
+            margin: 0 auto 2rem;
+            cursor: pointer;
+        }
+
+        .credit-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .credit-card-wrap.flipped .credit-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 18px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(18, 59, 114, 0.25);
+            background: linear-gradient(135deg, #0B1F3F 0%, #123B72 50%, #1D65A6 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+
+        .card-front::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(32, 180, 134, 0.25) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            padding: 1.5rem 0;
+            background: #0F172A;
+        }
+
+        .card-chip {
+            width: 48px;
+            height: 36px;
+            background: linear-gradient(135deg, #FCD34D, #F59E0B);
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .card-chip::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .card-number-display {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            margin: 1rem 0;
+        }
+
+        .card-holder-exp {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Frozen Overlay State */
+        .card-front.frozen-card {
+            filter: grayscale(0.8) opacity(0.7);
+        }
+
+        .frozen-badge-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-12deg);
+            background: #DC2626;
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            padding: 8px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.5);
+            border: 2px solid white;
+            z-index: 10;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-logo"><img src="assets/images/logo.png" alt="AmeriCU Credit Union"></a>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-category">Main Menu</div>
+                <a href="dashboard.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Dashboard</span></a>
+                <a href="accounts.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+                <a href="transfers.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfers</span></a>
+                <a href="beneficiaries.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Beneficiaries</span></a>
+                <a href="cards.html" class="nav-item active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+                <a href="bills.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Bill Pay</span></a>
+                <a href="transactions.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><span>Transactions</span></a>
+                <a href="statements.html" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg><span>Statements</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button onclick="App.handleLogout()" class="btn btn-outline btn-full btn-sm">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+                    <h1 class="page-title">Virtual & Debit Cards</h1>
+                </div>
+            </header>
+
+            <main class="content-body" style="max-width:850px; margin:0 auto;">
+                
+                <!-- 3D Card Interactive Preview -->
+                <div class="credit-card-wrap" id="card-3d-wrap" title="Click card to flip over">
+                    <div class="credit-card-inner">
+                        <!-- Front -->
+                        <div class="card-front" id="card-front-el">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:800; font-size:1.1rem; letter-spacing:1px;">AMERICU</div>
+                                <span style="font-size:0.65rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px; font-weight:700;">DEBIT VISA</span>
+                            </div>
+                            
+                            <div class="card-chip"></div>
+
+                            <div class="card-number-display" id="card-num-text">•••• •••• •••• 4821</div>
+
+                            <div class="card-holder-exp">
+                                <div>
+                                    <div style="font-size:0.65rem; opacity:0.7;">CARDHOLDER</div>
+                                    <div style="font-weight:700; margin-top:2px;">KARLEE GREY</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:0.65rem; opacity:0.7;">VALID THRU</div>
+                                    <div style="font-weight:700; margin-top:2px;">08/29</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="card-back">
+                            <div style="width:100%; height:44px; background:#000; margin-top:0.5rem;"></div>
+                            <div style="padding:1rem 1.5rem; text-align:right;">
+                                <div style="font-size:0.65rem; color:#94A3B8; margin-bottom:0.25rem;">CVV / CVC</div>
+                                <div style="background:white; color:#000; font-family:monospace; font-weight:700; padding:4px 12px; display:inline-block; border-radius:4px;">382</div>
+                            </div>
+                            <div style="padding:0 1.5rem; font-size:0.65rem; color:#64748B; line-height:1.3;">
+                                Issued by AmeriCU Credit Union pursuant to license by Visa USA Inc.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Controls Grid -->
+                <div class="card" style="margin-bottom:2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                        <div>
+                            <div style="font-size:0.8rem; color:var(--color-text-muted);">Card Status</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.2rem;">
+                                <span class="status-badge status-active" id="card-status-badge">Active</span>
+                                <span style="font-size:0.85rem; color:var(--color-text-muted);">Linked to Primary Checking (•••• 4821)</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                            <button id="toggle-card-num-btn" class="btn btn-outline">
+                                <span>Show Card Details</span>
+                            </button>
+                            <button id="freeze-card-btn" class="btn btn-danger">
+                                <span>Freeze Card</span>
+                            </button>
+                            <button id="set-limits-btn" class="btn btn-primary">
+                                <span>Set Spending Limits</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spending Limit Progress Card -->
+                <div class="card" style="margin-bottom:2rem;">
+                    <div class="card-header">
+                        <h2 class="card-title">Monthly Card Spending Limit</h2>
+                    </div>
+
+                    <div style="margin-bottom:1rem;">
+                        <div style="display:flex; justify-content:space-between; font-size:0.875rem; font-weight:600; margin-bottom:0.4rem;">
+                            <span>Spent: <strong id="spent-val">$1,248.50</strong></span>
+                            <span>Limit: <strong id="limit-val">$5,000.00</strong></span>
+                        </div>
+                        <div style="width:100%; height:10px; background:var(--color-bg); border-radius:var(--radius-full); overflow:hidden;">
+                            <div id="spent-progress-bar" style="width:25%; height:100%; background:var(--color-accent); border-radius:var(--radius-full); transition:width 0.5s ease;"></div>
+                        </div>
+                    </div>
+
+                    <div style="font-size:0.8rem; color:var(--color-text-muted);">
+                        Daily ATM Withdrawal Limit: <strong id="daily-limit-val">$1,500.00</strong>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Spending Limits Modal -->
+    <div id="limits-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Adjust Spending Limits</h3>
+                <button class="modal-close" onclick="App.closeModal('limits-modal')">&times;</button>
+            </div>
+            <form id="limits-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Daily ATM Limit ($)</label>
+                        <input type="number" id="input-daily-limit" class="form-control" value="1500" min="100" max="5000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Monthly Card Purchase Limit ($)</label>
+                        <input type="number" id="input-monthly-limit" class="form-control" value="5000" min="500" max="25000" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="App.closeModal('limits-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Limits</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1v4a1 1 0 001 1m-6 0h6"/></svg><span>Home</span></a>
+        <a href="accounts.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Accounts</span></a>
+        <a href="transfers.html" class="mobile-nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg><span>Transfer</span></a>
+        <a href="cards.html" class="mobile-nav-item active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Cards</span></a>
+    </nav>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cards.js"></script>
+</body>
+</html>
